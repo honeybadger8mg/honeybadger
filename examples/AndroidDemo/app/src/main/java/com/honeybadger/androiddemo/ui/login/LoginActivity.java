@@ -26,11 +26,13 @@ import com.honeybadger.androiddemo.R;
 import com.honeybadger.androiddemo.ui.login.LoginViewModel;
 import com.honeybadger.androiddemo.ui.login.LoginViewModelFactory;
 import com.honeybadger.androiddemo.databinding.ActivityLoginBinding;
+import com.honeybadger.nativelib.NativeLib1;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    private TextView m_tvLog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,9 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
+        final Button btnNative1 = binding.btnNative1;
         final ProgressBar loadingProgressBar = binding.loading;
+        m_tvLog = binding.tvLog;
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -122,6 +126,20 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+
+        btnNative1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String strOut = NativeLib1.stringFromJNI("原始参数字符串");
+                ShowLog(strOut);
+            }
+        });
+    }
+
+    private void ShowLog(String strLog) {
+        if (m_tvLog != null) {
+            m_tvLog.append(strLog + "\n");
+        }
     }
 
     private void updateUiWithUser(LoggedInUserView model) {

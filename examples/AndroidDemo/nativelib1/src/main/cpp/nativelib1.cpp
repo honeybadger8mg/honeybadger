@@ -4,7 +4,11 @@
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_honeybadger_nativelib_NativeLib1_stringFromJNI(
         JNIEnv* env,
-        jobject /* this */) {
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
+        jclass, jstring jsArg) {
+    const char *szData = env->GetStringUTFChars(jsArg, JNI_FALSE);
+    std::string strData = szData;
+    env->ReleaseStringUTFChars(jsArg, szData);
+
+    std::string strOut = strData + " 已处理";
+    return env->NewStringUTF(strOut.c_str());
 }

@@ -11,5 +11,5 @@ public class NativeLib1 {
      * A native method that is implemented by the 'nativelib' native library,
      * which is packaged with this application.
      */
-    public native String stringFromJNI();
+    public static native String stringFromJNI(String strArg);
 }
