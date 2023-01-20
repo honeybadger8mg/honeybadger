@@ -23,8 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.honeybadger.androiddemo.R;
-import com.honeybadger.androiddemo.ui.login.LoginViewModel;
-import com.honeybadger.androiddemo.ui.login.LoginViewModelFactory;
 import com.honeybadger.androiddemo.databinding.ActivityLoginBinding;
 import com.honeybadger.nativelib.NativeLib1;
 
@@ -130,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
         btnNative1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String strOut = NativeLib1.stringFromJNI("原始参数字符串");
+                String strOut = NativeLib1.DoTest1("原始参数字符串");
                 ShowLog(strOut);
             }
         });
