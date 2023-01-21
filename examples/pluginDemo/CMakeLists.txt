@@ -8,10 +8,11 @@ endif ()
 
 project(PluginDemo)
 
-include_directories(../AndroidClass/include)
-include_directories(../AndroidClass/ClassManager)
-include_directories(../CommTools/share)
-include_directories(../DisAsmEngine/include/capstone)
+include_directories(include)
+include_directories(hb_headers/AndroidClass/include)
+include_directories(hb_headers/CommTools/include)
+
+link_directories(hb_libs)
 
 set(Plugin_SOURCES
         src/PluginExport.cpp

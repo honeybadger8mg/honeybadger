@@ -10,17 +10,17 @@
 class com_honeybadger_nativelib_NativeLib1 : public ISimulateClass {
 public:
     com_honeybadger_nativelib_NativeLib1(HB::EntryInterface *pDebugger);
-    UINT GetClassID() override;
+    uint32_t GetClassID() override;
 
     string GetClassSig() override;
 
-    UINT GetMethodID(string strMethodSig) override;
+    uint32_t GetMethodID(string strMethodSig) override;
 
-    UINT CallStaticObjectMethodV(void *pDebugger, UINT iMtdID) override;
+    uint32_t CallStaticObjectMethodV(void *pDebugger, uint32_t iMtdID) override;
 
-    void SetInstanceID(UINT iID) override;
+    void SetInstanceID(uint32_t iID) override;
 
-    UINT GetInstanceID() override;
+    uint32_t GetInstanceID() override;
 
     string SearchMethodName(int iMtdID) override;
 
@@ -28,40 +28,40 @@ public:
 
     int GetArrayCount() override;
 
-    UINT GetObjectArrayElement(int iIndex) override;
+    uint32_t GetObjectArrayElement(int iIndex) override;
 
-    UINT GetFieldID(string strFieldSig) override;
+    uint32_t GetFieldID(string strFieldSig) override;
 
-    UINT GetFieldValue(int iFieldID) override;
-    UINT ExecNewObject(void *pDebugger, UINT iMtdID) override ;
-    UINT OnInvoke(void *pHbThis, void *pInvokeMethodInst) override ;
+    uint32_t GetFieldValue(int iFieldID) override;
+    uint32_t ExecNewObject(void *pDebugger, uint32_t iMtdID) override ;
+    uint32_t OnInvoke(void *pHbThis, void *pInvokeMethodInst) override ;
 
-    UINT OnGet(void *pHbThis, void *pFieldInstPara) override;
+    uint32_t OnGet(void *pHbThis, void *pFieldInstPara) override;
 
     void FreeSelf() override;
 
 
     HB::EntryInterface *GetEntry() override;
 
-    UINT CallObjectMethod(void *pDebugger, UINT iMtdID) override;
+    uint32_t CallObjectMethod(void *pDebugger, uint32_t iMtdID) override;
 
     uint64_t GetLongField(int iFieldID) override;
 
-    uint64_t CallStaticLongMethodV(void *pDebugger, UINT iMtdID) override;
+    uint64_t CallStaticLongMethodV(void *pDebugger, uint32_t iMtdID) override;
 
-    UINT CallObjectMethodV(void *pDebugger, UINT iMtdID) override;
+    uint32_t CallObjectMethodV(void *pDebugger, uint32_t iMtdID) override;
 
-    _ULONG CallLongMethodV(void *pDebugger, UINT iMtdID) override;
+    uint64_t CallLongMethodV(void *pDebugger, uint32_t iMtdID) override;
 
-    UINT CallSetObjectField(void *pDebugger, UINT iFiledID, ISimulateClass *pValue) override;
+    uint32_t CallSetObjectField(void *pDebugger, uint32_t iFiledID, ISimulateClass *pValue) override;
 
-    UINT CallSetIntField(void *pDebugger, UINT iFiledID, UINT iValue) override;
+    uint32_t CallSetIntField(void *pDebugger, uint32_t iFiledID, uint32_t iValue) override;
 
     float GetFloatField(int iFieldID) override;
 
-    UINT GetSuperClass() override;
+    uint32_t GetSuperClass() override;
 
-    UINT GetObjectRefType() override;
+    uint32_t GetObjectRefType() override;
 
 private:
     void InsertMethodId(string strMethodSig) override;
@@ -71,13 +71,13 @@ private:
 
 
 private:
-    UINT m_iClassId;
+    uint32_t m_iClassId;
     string m_strClsssSig;
-    UINT m_iInstaceID;
-    unordered_map<string, UINT> m_mapMethodSig_Id; // sig->id
-    unordered_map<UINT , string> m_mapMethodID_Sig; // id->sig
+    uint32_t m_iInstaceID;
+    unordered_map<string, uint32_t> m_mapMethodSig_Id; // sig->id
+    unordered_map<uint32_t , string> m_mapMethodID_Sig; // id->sig
     // 成员变量
-    unordered_map<string, UINT> m_mapFieldSig_Id; // sig->id
+    unordered_map<string, uint32_t> m_mapFieldSig_Id; // sig->id
 
 
     HB::EntryInterface *m_pEntry;

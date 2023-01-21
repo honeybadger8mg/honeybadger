@@ -3,3 +3,4 @@
 /workspace.xml
 .idea
 cmake-build-debug
+cmake-build-release

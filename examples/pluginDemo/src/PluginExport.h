@@ -5,9 +5,8 @@
 #ifndef HONEYBADGERGUI_PLUGINEXPORT_H
 #define HONEYBADGERGUI_PLUGINEXPORT_H
 
-#include "include/PluginCommHeader.h"
-#include "include/IRestrictedListener.h"
-#include "TestC1.h"
+#include "PluginCommHeader.h"
+#include "IRestrictedListener.h"
 
 extern "C" { //导出
     HBMenuChain *GetMenu();

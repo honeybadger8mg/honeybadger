@@ -70,12 +70,12 @@ void DispatchAction(int iActId) {
             pJsArg->SetContent("hello world");
 
             com_honeybadger_nativelib_NativeLib1 *pThis = new com_honeybadger_nativelib_NativeLib1(g_pListener->GetEntry());
-            vector<UINT> vecPara = {g_pListener->GetJniEnvAddr(), pThis->GetInstanceID(), pJsArg->GetInstanceID()};
-            map<UINT, uint64_t> mapResult;
+            vector<uint32_t> vecPara = {g_pListener->GetJniEnvAddr(), pThis->GetInstanceID(), pJsArg->GetInstanceID()};
+            map<uint32_t, uint64_t> mapResult;
             g_pListener->ExecJniInThread(true, "Java_com_honeybadger_nativelib_NativeLib1_DoTest1", 3, vecPara,
                                          &mapResult);
 
-            UINT iOut = mapResult[ARM_REG_R0];
+            uint32_t iOut = mapResult[ARM_REG_R0];
             java_lang_String *pJsOut = (java_lang_String *) g_pListener->GetEntry()->GetVaClassInst()->SearchClass_Inst(iOut);
             string strOut = "执行 DoTest1 结束,结果:" + pJsOut->GetContent();
             CTLOG(strOut.c_str());
@@ -86,12 +86,12 @@ void DispatchAction(int iActId) {
             uint32_t iArg = 100;
 
             com_honeybadger_nativelib_NativeLib1 *pThis = new com_honeybadger_nativelib_NativeLib1(g_pListener->GetEntry());
-            vector<UINT> vecPara = {g_pListener->GetJniEnvAddr(), pThis->GetInstanceID(), iArg};
-            map<UINT, uint64_t> mapResult;
+            vector<uint32_t> vecPara = {g_pListener->GetJniEnvAddr(), pThis->GetInstanceID(), iArg};
+            map<uint32_t, uint64_t> mapResult;
             g_pListener->ExecJniInThread(true, "Java_com_honeybadger_nativelib_NativeLib1_DoTest2", 3, vecPara,
                                          &mapResult);
 
-            UINT iOut = mapResult[ARM_REG_R0];
+            uint32_t iOut = mapResult[ARM_REG_R0];
             string strOut = "执行 DoTest2 结束,结果:" + CPublicUtil::Int2String(iOut);
             CTLOG(strOut.c_str());
             break;
