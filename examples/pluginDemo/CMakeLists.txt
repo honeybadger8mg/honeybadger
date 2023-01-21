@@ -12,7 +12,14 @@ include_directories(include)
 include_directories(hb_headers/AndroidClass/include)
 include_directories(hb_headers/CommTools/include)
 
-link_directories(hb_libs)
+
+
+if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    link_directories(hb_libs/debug)
+else ()
+    link_directories(hb_libs/release)
+endif ()
+
 
 set(Plugin_SOURCES
         src/PluginExport.cpp
