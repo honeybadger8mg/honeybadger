@@ -33,7 +33,7 @@ Java_com_honeybadger_nativelib_NativeLib1_DoTestReflect(JNIEnv *env, jclass claz
     jstring jsArg = env->NewStringUTF("来自于native的参数");
     jstring jsResult = (jstring) env->CallStaticObjectMethod(jcTarget, mtdTarget, jsArg);
     const char *szResult = env->GetStringUTFChars(jsResult, JNI_FALSE);
-    bool bVerify = strcmp(szResult, "ok");
+    bool bVerify = strcmp(szResult, "ok") == 0;
     env->ReleaseStringUTFChars(jsArg, szResult);
     return bVerify;
 }

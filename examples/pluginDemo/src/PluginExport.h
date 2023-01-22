@@ -9,16 +9,17 @@
 #include "IRestrictedListener.h"
 
 extern "C" { //导出
+    HBMenuChain *GetMenu();
     // 设置接口  所有的主动调用均由此实现
     void SetRestrictedListener(IRestrictedListener *pCb);
-
-
-    // 定义菜单
-    HBMenuChain *GetMenu();
     // 准备  设置andridid等
     void DoPrepare();
+
+
     // 函数调用  根据id分发
     void DispatchAction(int iActId);
+
+
 }
 
 
