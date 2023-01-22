@@ -9,6 +9,7 @@
 #include "CommToolsHeader.h"
 #include "EntryInterface.h"
 #include <assert.h>
+#include "DebuggerInterface.h"
 
 com_honeybadger_nativelib_NativeLib1::com_honeybadger_nativelib_NativeLib1(HB::EntryInterface *pDebugger) {
     m_pEntry = pDebugger;
@@ -19,6 +20,7 @@ com_honeybadger_nativelib_NativeLib1::com_honeybadger_nativelib_NativeLib1(HB::E
 
     InsertMethodId("DoTest1(Ljava/lang/String;)Ljava/lang/String;");
     InsertMethodId("DoTest2(I)I");
+    InsertMethodId("TestReflect(Ljava/lang/String;)Ljava/lang/String;");
     for (unordered_map<string, uint32_t>::iterator itLoop = m_mapMethodSig_Id.begin();
          itLoop != m_mapMethodSig_Id.end(); ++itLoop) {
         m_mapMethodID_Sig.insert(make_pair(itLoop->second, itLoop->first));
@@ -57,9 +59,15 @@ uint32_t com_honeybadger_nativelib_NativeLib1::CallStaticObjectMethodV(void *pHb
     if (m_mapMethodID_Sig.find(iMtdID) != m_mapMethodID_Sig.end()) {
         string strMtdSig = m_mapMethodID_Sig[iMtdID];
         DebuggerInterface *pDebugger = (DebuggerInterface*)pHbThis;
-        if (strMtdSig == "DoTest1(Ljava/lang/String;)Ljava/lang/String;") {
+        if (strMtdSig == "TestReflect(Ljava/lang/String;)Ljava/lang/String;") {
+            // 读取参数并打印
+            uint32_t iArgInstID = pDebugger->ReadJniFuncPara(0);
+            java_lang_String *pJsArg = (java_lang_String *)m_pEntry->InvokeSearchClass_Inst(iArgInstID);
+            string strArgLog = "TestReflect被调用，参数是:" + pJsArg->GetContent();
+            CTLOG(strArgLog.c_str());
+            // 设置返回的对象
             java_lang_String *pjbPara = new java_lang_String(m_pEntry);
-            pjbPara->SetContent("testdata");
+            pjbPara->SetContent("ok");
             return pjbPara->GetInstanceID();
         } else {
             assert(false);

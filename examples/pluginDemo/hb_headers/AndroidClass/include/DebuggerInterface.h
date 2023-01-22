@@ -5,7 +5,6 @@
 #ifndef HONEYBADGER_DEBUGGERINTERFACE_H
 #define HONEYBADGER_DEBUGGERINTERFACE_H
 
-#include "PreDefine.h"
 #include <string>
 #include <IceRegister.h>
 
@@ -21,7 +20,7 @@ class DebuggerInterface {
 public:
     virtual uint32_t ReadJniFuncPara(int iParaIndex) = 0;
     virtual RegValue ReadRegValueDirect(int acName) = 0;
-    virtual RegValue ReadRegValueDirect(cs_arm_op *csOp0) = 0;
+    virtual RegValue ReadRegValueDirect(void *opArg) = 0;
     virtual uint8_t *ConvertVirtualAddress2Buf(uint32_t iVtAddr) = 0;
     virtual uint8_t *ConvertVirtualAddress2Buf(RegValue regValue) = 0;
 
